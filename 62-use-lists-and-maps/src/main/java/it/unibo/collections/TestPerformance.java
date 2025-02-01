@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
  */
 public final class TestPerformance {
 
-    private static final int ELEMS = 1_000_000;
+    private static final int ELEMS = 1_100_000;
 
     private TestPerformance() { }
 

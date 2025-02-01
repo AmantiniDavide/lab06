@@ -1,6 +1,7 @@
 package it.unibo.generics.graph;
 
 import it.unibo.generics.graph.api.Graph;
+import it.unibo.generics.graph.api.SimpleGraph;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -14,15 +15,12 @@ public final class UseGraph {
     private UseGraph() {
     }
 
-    /**
-     * @param args
-     *            ignored
-     */
     public static void main(final String... args) {
         /*
-         * Test your graph implementation(s) by calling testGraph
+         * Creiamo un'istanza di SimpleGraph e testiamo la sua implementazione
          */
-        testGraph(null);
+        Graph<String> graph = new SimpleGraph<>();
+        testGraph(graph);
     }
 
     private static void testGraph(final Graph<String> graph) {
@@ -37,16 +35,19 @@ public final class UseGraph {
         graph.addEdge("d", "e");
         graph.addEdge("c", "a");
         graph.addEdge("e", "a");
+        
         /*
-         * Should be ["a","b","c","d","e"], in any order
+         * Dovrebbe essere ["a","b","c","d","e"], in qualsiasi ordine
          */
         assertIsAnyOf(graph.nodeSet(), Set.of(splitOnWhiteSpace("a b c d e")));
+        
         /*
-         * ["d","a"], in any order
+         * Dovrebbe essere ["d","a"], in qualsiasi ordine
          */
         assertIsAnyOf(graph.linkedNodes("c"), Set.of(splitOnWhiteSpace("a d")));
+        
         /*
-         * Either the path b,c,a or b,c,d,e,a
+         * Dovrebbe essere uno dei seguenti percorsi: b,c,a o b,c,d,e,a
          */
         assertIsAnyOf(
             graph.getPath("b", "a"),
@@ -58,7 +59,7 @@ public final class UseGraph {
     private static void assertIsAnyOf(final Object actual, final Object... valid) {
         for (final var target: Objects.requireNonNull(valid)) {
             if (Objects.equals(target, actual)) {
-                System.out.println("OK: " + actual + " matches " + target); // NOPMD
+                System.out.println("OK: " + actual + " matches " + target);
                 return;
             }
         }
